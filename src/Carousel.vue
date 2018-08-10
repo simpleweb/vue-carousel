@@ -539,16 +539,17 @@ export default {
       // compute the momemtum speed
       const eventPosX = this.isTouch ? e.changedTouches[0].clientX : e.clientX;
       const deltaX = this.dragStartX - eventPosX;
+      const width = this.scrollPerPage
+        ? this.slideWidth * this.currentPerPage
+        : this.slideWidth;
       this.dragMomentum = deltaX / (e.timeStamp - this.startTime);
 
-      // take care of the minSwipteDistance prop, if not 0 and delta is bigger than delta
+      // take care of the minSwipeDistance prop, if not 0 and delta is bigger than delta
       if (
         this.minSwipeDistance !== 0 &&
-        Math.abs(deltaX) >= this.minSwipeDistance
+        Math.abs(deltaX) >= this.minSwipeDistance &&
+        Math.abs(deltaX) < width / 2
       ) {
-        const width = this.scrollPerPage
-          ? this.slideWidth * this.currentPerPage
-          : this.slideWidth;
         this.dragOffset = this.dragOffset + Math.sign(deltaX) * (width / 2);
       }
 
