@@ -120,6 +120,10 @@ export default {
       type: Number,
       default: 8
     },
+    swipeBump: {
+      type: Boolean,
+      default: false
+    },
     /**
      * Amount of padding to apply around the label in pixels
      */
@@ -549,7 +553,10 @@ export default {
         const width = this.scrollPerPage
           ? this.slideWidth * this.currentPerPage
           : this.slideWidth;
-        this.dragOffset = this.dragOffset + Math.sign(deltaX) * (width / 2);
+
+        if (this.swipeBump) {
+          this.dragOffset = this.dragOffset + Math.sign(deltaX) * (width / 2);
+        }
       }
 
       this.offset += this.dragOffset;
