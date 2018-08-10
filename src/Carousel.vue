@@ -381,7 +381,7 @@ export default {
      * @return {Number} The index of the next page
      * */
     getNextPage() {
-      if (this.currentPage < this.pageCount - 1) {
+      if (this.currentPage < this.pageCount - this.scrollPerPage) {
         return this.currentPage + 1;
       }
       return this.loop ? 0 : this.currentPage;
